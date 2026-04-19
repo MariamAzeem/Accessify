@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessify</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- SPLASH SCREEN START -->
+<div id="splash">
+  <div class="splash-container">
+
+    <!-- Logo with Font Awesome icon -->
+    <div class="logo-wrap">
+      <i class="fas fa-universal-access logo"></i>
+      <div class="pulse"></div>
+    </div>
+
+    <!-- Title and tagline -->
+    <h1 class="title">Accessify</h1>
+    <p class="tagline">Smarter accessibility. Better mobility.</p>
+
+    <!-- Loader animation -->
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- SPLASH SCREEN END -->
+  <div class="app">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <i class="fas fa-universal-access"></i>
+        <h1>Accessify</h1>
+      </div>
+      
+      <!-- Search -->
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Search buildings...">
+          <button onclick="loadBuildings()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Filters -->
+      <div class="filters">
+        <h3><i class="fas fa-filter"></i> Needs</h3>
+        <div class="checkbox-list">
+          <label><input type="checkbox" value="ramp"> Ramp</label>
+          <label><input type="checkbox" value="elevator"> Elevator</label>
+          <label><input type="checkbox" value="washroom"> Washroom</label>
+          <label><input type="checkbox" value="prayerArea"> Prayer Area</label>
+          <label><input type="checkbox" value="lactatingArea"> Lactating Area</label>
+        </div>
+      </div>
+      
+      <!-- Legend -->
+      <div class="legend">
+        <h4><i class="fas fa-circle-info"></i> Pin Colors</h4>
+        <div class="legend-item excellent">
+          <div class="pin"></div>
+          <span>Excellent (4+)</span>
+        </div>
+        <div class="legend-item good">
+          <div class="pin"></div>
+          <span>Good (2.5-4)</span>
+        </div>
+        <div class="legend-item poor">
+          <div class="pin"></div>
+          <span>Poor (<2.5)</span>
+        </div>
+      </div>
+
+      <!-- Guide Button at the bottom -->
+      <button id="guideBtn" class="guide-btn">
+        <i class="fas fa-info-circle"></i> Guide
+      </button>
+    </div>
+    
+    <!-- Map -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="review-modal">
+    <span class="close-review">&times;</span>
+    <div id="reviewContent"></div>
+  </div>
+  <!-- Guide Modal -->
+  <div id="guideModal" class="guide-modal">
+    <div class="guide-content">
+      <span class="close-guide">&times;</span>
+    <h2>How to Use the Accessify</h2>
+
+    <h3>1. Search for a Location</h3>
+    <p>Type the place you want to go (e.g., library, canteen, department) into the search bar.</p>
+
+    <h3>2. Select Accessibility Needs</h3>
+    <p>Choose the accessibility features that matter to you:</p>
+    <ul>
+      <li>Ramp</li>
+      <li>Elevator</li>
+      <li>Accessible Washroom</li>
+      <li>Prayer Area</li>
+      <li>Lactating Area</li>
+    </ul>
+    <p>Click Search after selecting your needs.</p>
+
+    <h3>3. View Map Results</h3>
+    <p>Pins will appear only for locations that match your selected criteria.<br>
+       Each pin is color-coded based on accessibility:</p>
+    <ul>
+      <li>🟢 Green → Highly accessible</li>
+      <li>🟡 Yellow → Moderately accessible</li>
+      <li>🔴 Red → Poor accessibility</li>
+    </ul>
+
+    <h3>4. Check Accessibility Details</h3>
+    <p>Click on a pin to open its accessibility card, which shows:</p>
+    <ul>
+      <li>Criteria Met: e.g., 2 out of 3 selected features are available</li>
+      <li>Personalized Score: based only on your selected needs</li>
+      <li>Service Breakdown: scores for each selected service</li>
+      <li>Overall Score and Score breakdown for all services</li>
+      <li>Photos: real-world images for verification</li>
+    </ul>
+
+    <h3>5. Submit a Review</h3>
+    <ul>
+      <li>Scroll to the end of the card and click Add Review to open the review form.</li>
+      <li>Rate each service from 1 (lowest) to 5 (highest).</li>
+      <li>If you don’t want to rate a service, leave it blank.</li>
+      <li>Upload at least one photo (required) as proof of accessibility.</li>
+    </ul>
+
+    <h3>6. Review Impact</h3>
+    <ul>
+      <li>Your review updates the accessibility scores.</li>
+      <li>Uploaded photos help others verify conditions.</li>
+    </ul>
+
+    <h3>⚠️ Important Notes</h3>
+    <ul>
+      <li>At least one image is required when submitting a review.</li>
+      <li>Ratings are optional per service, but images are mandatory.</li>
+      <li>Scores are dynamically updated based on user feedback.</li>
+    </ul>
+  </div>
+</div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
