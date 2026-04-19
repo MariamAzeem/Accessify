@@ -13,7 +13,7 @@ const app = express();
 // ========================
 // MIDDLEWARE
 // ========================
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
 app.use(express.json({ limit: '10mb' }));
 
 // Serve uploaded images (public folder)
@@ -243,7 +243,7 @@ app.post('/api/buildings/:id/review', async (req, res) => {
 
         await client.query(
           'INSERT INTO photos(place_id, photo_url) VALUES($1, $2)',
-          [buildingId, filename]
+          [buildingId, `/public/${filename}`]
         );
 
         photoCount++;
