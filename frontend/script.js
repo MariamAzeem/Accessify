@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const BASE_URL = "https://accessify-7wx2.onrender.com";
+  const BASE_URL = window.location.origin;
 
   // Splash screen
   setTimeout(() => {
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await fetch(`${BASE_URL}/api/buildings/${id}/review`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ photos })
+        body: JSON.stringify({ratings: {}, photos })
       });
 
       alert("Review submitted!");
