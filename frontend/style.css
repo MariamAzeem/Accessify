@@ -1139,3 +1139,26 @@ color: #E2E8F0;
   left: 8px;
   border-radius: 50%;
 }
+/* === HAMBURGER BUTTON === */
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 2000;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+}
