@@ -389,3 +389,27 @@ window.submitReview = async function (buildingId) {
   window.loadBuildings = loadBuildings;
 
 });
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+});
+
+// optional close on outside click
+document.addEventListener("click", (e) => {
+  if (
+    !sidebar.contains(e.target) &&
+    !menuBtn.contains(e.target)
+  ) {
+    sidebar.classList.remove("open");
+  }
+});
+function triggerSearch() {
+  loadBuildings();
+}
+
+// Enter key support
+document.getElementById("search").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") triggerSearch();
+});
