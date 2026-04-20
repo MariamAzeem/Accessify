@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const BASE_URL = window.location.origin;
 
-  // ✅ FIXED: Hide splash after 2 seconds
+  // Hide splash after 2 seconds
   setTimeout(() => {
     const splash = document.getElementById('splash');
     if (splash) splash.classList.add('hide');
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 🔥 YOUR ORIGINAL CARD - IMAGE URL ONLY FIXED
+  // Accessibility Card
   function generatePersonalizedCard(building, data) {
     const { criteriaMet, count, personalizedScore, criteriaBreakdownHTML, overallScore, lastUpdated } = data;
 
@@ -142,19 +142,22 @@ document.addEventListener("DOMContentLoaded", () => {
         <div><span>${service}</span><span>${building.serviceScores[service]}/5</span></div>
       `;
     }
-
-    // 🔥 FIXED IMAGE HANDLING - Backend saves /public/filename
-    let photosHTML = '';
-    if (building.photos?.length) {
-      photosHTML = `
-        <div class="photo-grid">
-          ${building.photos.map(p => {
-            const imgSrc = p.startsWith('http') ? p : `${BASE_URL}${p}`;
-            return `<img src="${imgSrc}" onclick="openModal('${imgSrc}')" alt="Photo" style="max-width:100%; height:auto;">`;
-          }).join('')}
-        </div>
-      `;
-    }
+let photosHTML = '';
+if (building.photos?.length) {
+  photosHTML = `
+    <div class="photo-grid">
+      ${building.photos.map(p => {
+        // Clean path + serve from GitHub public/
+        const cleanPath = p.startsWith('/') ? p.slice(1) : p;
+        const imgSrc = `${BASE_URL}/public/${cleanPath}`;
+        return `<img src="${imgSrc}" 
+                   onclick="openModal('${imgSrc}')" 
+                   alt="Photo" 
+                   style="max-width:100%; height:auto;">`;
+      }).join('')}
+    </div>
+  `;
+}
 
     const scoreClass = personalizedScore >= 4 ? 'excellent' :
       personalizedScore >= 2.5 ? 'good' : 'poor';
